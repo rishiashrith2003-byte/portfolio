@@ -1,238 +1,229 @@
-/* ─────────────────────────────────────────
-   PORTFOLIO — script.js
-───────────────────────────────────────── */
-
 "use strict";
 
-/* ── 1. Dynamic year in footer ── */
-const yearEl = document.getElementById("year");
+/* ════════════════════════════════════════════
+   1. FOOTER YEAR
+════════════════════════════════════════════ */
+const yearEl = document.getElementById("footerYear");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* ── 2. Sticky nav — add .scrolled class on scroll ── */
+/* ════════════════════════════════════════════
+   2. STICKY NAV — .scrolled after 80px
+════════════════════════════════════════════ */
 const nav = document.getElementById("nav");
 
-function handleNavScroll() {
-  nav.classList.toggle("scrolled", window.scrollY > 60);
+function onNavScroll() {
+  nav.classList.toggle("scrolled", window.scrollY > 80);
 }
 
-window.addEventListener("scroll", handleNavScroll, { passive: true });
-handleNavScroll();
+window.addEventListener("scroll", onNavScroll, { passive: true });
+onNavScroll();
 
-/* ── 3. Mobile nav toggle ── */
-const navToggle = document.getElementById("navToggle");
+/* ════════════════════════════════════════════
+   3. MOBILE BURGER MENU
+════════════════════════════════════════════ */
+const burger    = document.getElementById("navBurger");
 const navLinks  = document.getElementById("navLinks");
 
-navToggle.addEventListener("click", () => {
+burger.addEventListener("click", () => {
   const open = navLinks.classList.toggle("open");
-  navToggle.classList.toggle("open", open);
-  navToggle.setAttribute("aria-expanded", String(open));
+  burger.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
 });
 
-// Close mobile nav on link click
-navLinks.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
+// Allow keyboard: Enter / Space
+burger.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    burger.click();
+  }
+});
+
+// Close on link click
+navLinks.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
     navLinks.classList.remove("open");
-    navToggle.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
+    burger.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
   });
 });
 
-/* ── 4. Intersection Observer — scroll-reveal ── */
-const revealTargets = [
-  { selector: ".timeline-item", stagger: true, delayBase: 100 },
-  { selector: ".hobby-card",    stagger: true, delayBase: 80  },
-];
+/* ════════════════════════════════════════════
+   4. ACTIVE NAV LINK (scroll-spy)
+════════════════════════════════════════════ */
+const sections    = document.querySelectorAll("section[id]");
+const navAnchors  = document.querySelectorAll(".nav-links a");
 
-function buildObserver({ selector, stagger, delayBase }) {
-  const elements = document.querySelectorAll(selector);
-  if (!elements.length) return;
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const delay = stagger
-          ? parseInt(el.dataset.index || el.dataset.year ? 0 : 0) * delayBase
-          : 0;
-
-        // stagger by DOM order
-        const siblings = Array.from(el.parentElement.children).filter(
-          c => c.classList.contains(el.classList[0])
-        );
-        const idx = siblings.indexOf(el);
-        el.style.transitionDelay = `${idx * delayBase}ms`;
-        el.classList.add("visible");
-        io.unobserve(el);
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  elements.forEach(el => io.observe(el));
-}
-
-revealTargets.forEach(buildObserver);
-
-/* ── 5. Skill bar animation ── */
-const proficiencySection = document.getElementById("proficiencyBars");
-
-if (proficiencySection) {
-  const bars = proficiencySection.querySelectorAll(".bar-fill");
-  const pcts = proficiencySection.querySelectorAll(".bar-pct");
-  let animated = false;
-
-  const barObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (!entry.isIntersecting || animated) return;
-      animated = true;
-
-      bars.forEach((bar, i) => {
-        const val = parseInt(bar.dataset.val, 10);
-        // Animate the bar width
-        bar.style.width = val + "%";
-
-        // Animate the percentage counter
-        const pct = pcts[i];
-        let current = 0;
-        const step = Math.ceil(val / 60);
-        const interval = setInterval(() => {
-          current = Math.min(current + step, val);
-          pct.textContent = current + "%";
-          if (current >= val) clearInterval(interval);
-        }, 20);
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  barObserver.observe(proficiencySection);
-}
-
-/* ── 6. Active nav link highlighting ── */
-const sections = document.querySelectorAll("section[id]");
-const navItems = document.querySelectorAll(".nav-links a");
-
-const sectionObserver = new IntersectionObserver(
+const spyObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const id = entry.target.getAttribute("id");
-      navItems.forEach(a => {
-        a.classList.toggle(
-          "active",
-          a.getAttribute("href") === `#${id}`
-        );
+      navAnchors.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
       });
     });
   },
-  { threshold: 0.4 }
+  { threshold: 0.45 }
 );
 
-sections.forEach(s => sectionObserver.observe(s));
+sections.forEach(s => spyObserver.observe(s));
 
-/* inject active nav style */
-const activeStyle = document.createElement("style");
-activeStyle.textContent = `.nav-links a.active { color: var(--text) !important; }
-.nav-links a.active::after { width: 100% !important; }`;
-document.head.appendChild(activeStyle);
+/* ════════════════════════════════════════════
+   5. SCROLL REVEAL (IntersectionObserver)
+════════════════════════════════════════════ */
+const revealEls = document.querySelectorAll(".reveal");
 
-/* ── 7. Contact form validation & submission ── */
-const form         = document.getElementById("contactForm");
-const formSuccess  = document.getElementById("formSuccess");
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry, _i) => {
+      if (!entry.isIntersecting) return;
 
-const fields = {
-  name:    { el: document.getElementById("name"),    err: document.getElementById("nameError") },
-  email:   { el: document.getElementById("email"),   err: document.getElementById("emailError") },
-  message: { el: document.getElementById("message"), err: document.getElementById("messageError") },
-};
+      // Stagger siblings inside same parent
+      const siblings = Array.from(entry.target.parentElement.children).filter(
+        el => el.classList.contains("reveal")
+      );
+      const idx = siblings.indexOf(entry.target);
+      entry.target.style.transitionDelay = `${idx * 90}ms`;
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.12 }
+);
 
-function validateEmail(v) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-}
+revealEls.forEach(el => revealObserver.observe(el));
 
-function clearError(field) {
-  field.el.classList.remove("error");
-  field.err.textContent = "";
-}
+/* ════════════════════════════════════════════
+   6. HERO EYEBROW TYPING EFFECT
+════════════════════════════════════════════ */
+(function heroTyping() {
+  const el     = document.getElementById("heroEyebrow");
+  if (!el) return;
 
-function setError(field, msg) {
-  field.el.classList.add("error");
-  field.err.textContent = msg;
-}
+  const words  = ["Engineer.", "Strategist.", "Builder.", "Leader."];
+  let   wi     = 0;       // word index
+  let   ci     = 0;       // char index
+  let   deleting = false;
+  const PAUSE_FULL  = 2200;  // pause when word fully typed
+  const PAUSE_EMPTY = 450;   // pause when cleared
+  const TYPE_SPEED  = 80;
+  const DEL_SPEED   = 45;
 
-function validateForm() {
-  let valid = true;
+  function tick() {
+    const word    = words[wi];
+    const current = word.slice(0, ci);
+    el.textContent = current + "|";
 
-  const nameVal = fields.name.el.value.trim();
-  if (!nameVal) {
-    setError(fields.name, "Name is required.");
-    valid = false;
-  } else if (nameVal.length < 2) {
-    setError(fields.name, "Please enter at least 2 characters.");
-    valid = false;
-  } else {
-    clearError(fields.name);
+    if (!deleting && ci === word.length) {
+      setTimeout(() => { deleting = true; tick(); }, PAUSE_FULL);
+      return;
+    }
+
+    if (deleting && ci === 0) {
+      deleting = false;
+      wi = (wi + 1) % words.length;
+      setTimeout(tick, PAUSE_EMPTY);
+      return;
+    }
+
+    ci += deleting ? -1 : 1;
+    setTimeout(tick, deleting ? DEL_SPEED : TYPE_SPEED);
   }
 
-  const emailVal = fields.email.el.value.trim();
-  if (!emailVal) {
-    setError(fields.email, "Email is required.");
-    valid = false;
-  } else if (!validateEmail(emailVal)) {
-    setError(fields.email, "Please enter a valid email address.");
-    valid = false;
-  } else {
-    clearError(fields.email);
+  setTimeout(tick, 800);
+})();
+
+/* ════════════════════════════════════════════
+   7. CONTACT FORM — validation + fake POST
+════════════════════════════════════════════ */
+(function contactForm() {
+  const form       = document.getElementById("contactForm");
+  if (!form) return;
+
+  const fields = {
+    name:    { el: document.getElementById("fname"),    err: document.getElementById("fnameErr") },
+    email:   { el: document.getElementById("femail"),   err: document.getElementById("femailErr") },
+    message: { el: document.getElementById("fmessage"), err: document.getElementById("fmessageErr") },
+  };
+  const successEl = document.getElementById("formSuccess");
+
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setErr(f, msg) {
+    f.el.classList.add("field-err");
+    f.err.textContent = msg;
   }
 
-  const msgVal = fields.message.el.value.trim();
-  if (!msgVal) {
-    setError(fields.message, "Message cannot be empty.");
-    valid = false;
-  } else if (msgVal.length < 10) {
-    setError(fields.message, "Message should be at least 10 characters.");
-    valid = false;
-  } else {
-    clearError(fields.message);
+  function clearErr(f) {
+    f.el.classList.remove("field-err");
+    f.err.textContent = "";
   }
 
-  return valid;
-}
+  function validate() {
+    let ok = true;
 
-// Live validation on blur
-Object.values(fields).forEach(field => {
-  field.el.addEventListener("blur", validateForm);
-  field.el.addEventListener("input", () => {
-    if (field.el.classList.contains("error")) validateForm();
+    const name = fields.name.el.value.trim();
+    if (!name || name.length < 2) {
+      setErr(fields.name, "Please enter your name.");
+      ok = false;
+    } else { clearErr(fields.name); }
+
+    const email = fields.email.el.value.trim();
+    if (!email) {
+      setErr(fields.email, "Email is required.");
+      ok = false;
+    } else if (!emailRx.test(email)) {
+      setErr(fields.email, "Enter a valid email address.");
+      ok = false;
+    } else { clearErr(fields.email); }
+
+    const msg = fields.message.el.value.trim();
+    if (!msg || msg.length < 10) {
+      setErr(fields.message, "Message should be at least 10 characters.");
+      ok = false;
+    } else { clearErr(fields.message); }
+
+    return ok;
+  }
+
+  // Live re-validate on blur
+  Object.values(fields).forEach(f => {
+    f.el.addEventListener("blur", () => validate());
+    f.el.addEventListener("input", () => {
+      if (f.el.classList.contains("field-err")) validate();
+    });
   });
-});
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  formSuccess.textContent = "";
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    successEl.textContent = "";
 
-  if (!validateForm()) return;
+    if (!validate()) return;
 
-  const btn = form.querySelector(".btn-submit");
-  btn.disabled = true;
-  btn.textContent = "Sending…";
+    const btn = form.querySelector(".btn-submit");
+    btn.disabled = true;
+    btn.textContent = "Sending…";
 
-  // Simulate async send (replace with real fetch/emailjs call)
-  setTimeout(() => {
-    btn.disabled = false;
-    btn.textContent = "Send message →";
-    form.reset();
-    Object.values(fields).forEach(clearError);
-    formSuccess.textContent = "✓ Message sent! I'll get back to you soon.";
-    setTimeout(() => { formSuccess.textContent = ""; }, 5000);
-  }, 1400);
-});
+    // Simulate /api/contact POST — replace with real fetch in Node.js context:
+    // fetch("/api/contact", { method: "POST", headers: {"Content-Type":"application/json"},
+    //   body: JSON.stringify({ name, email, message }) })
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = "Send Message →";
+      form.reset();
+      Object.values(fields).forEach(clearErr);
+      successEl.textContent = "✓ Message received. I'll be in touch.";
+      setTimeout(() => { successEl.textContent = ""; }, 5500);
+    }, 1600);
+  });
+})();
 
-/* ── 8. Smooth hero CTA scroll ── */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", (e) => {
-    const target = document.querySelector(anchor.getAttribute("href"));
+/* ════════════════════════════════════════════
+   8. SMOOTH ANCHOR SCROLL
+════════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.querySelector(a.getAttribute("href"));
     if (!target) return;
     e.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
