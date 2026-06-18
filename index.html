@@ -3,266 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alex Morgan — Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>KVSNS Rishi Ashrith — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ── NAV ── -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">AM</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+  <!-- ══ NAV ══ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="nav-monogram" aria-label="Home">KRA</a>
+    <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links" id="navLinks" role="list">
       <li><a href="#about">About</a></li>
-      <li><a href="#background">Background</a></li>
-      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ── HERO ── -->
-  <section class="hero" id="hero">
-    <div class="hero-noise"></div>
+  <!-- ══ HERO ══ -->
+  <section class="hero" id="hero" aria-label="Introduction">
+    <div class="hero-bg-pulse" aria-hidden="true"></div>
+    <div class="hero-rule-vert" aria-hidden="true"></div>
+
     <div class="hero-inner">
-      <span class="eyebrow">Hello, I'm</span>
-      <h1 class="hero-name">Alex<br /><em>Morgan</em></h1>
-      <p class="hero-tagline">Computer Science student · Builder · Curious human</p>
-      <div class="hero-cta">
-        <a href="#about" class="btn btn-primary">Explore my story</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <span class="deck-label" id="heroEyebrow" aria-live="polite">Engineer.</span>
+      <h1 class="hero-name">KVSNS<br /><em>Rishi Ashrith</em></h1>
+      <p class="hero-path">B.Tech ECE &nbsp;·&nbsp; IIITDM Kancheepuram &nbsp;→&nbsp; MBA &nbsp;·&nbsp; XIMB</p>
+      <div class="hero-actions">
+        <a href="#about" class="btn btn-gold">View Profile</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
       </div>
     </div>
-    <div class="hero-scroll-hint" aria-hidden="true">scroll ↓</div>
+
+    <div class="hero-scroll" aria-hidden="true">scroll ↓</div>
   </section>
 
-  <!-- ── ABOUT ── -->
-  <section class="section" id="about">
-    <div class="container two-col">
-      <div class="section-label">
-        <span class="label-line"></span>
-        <span>About me</span>
+  <!-- ══ ABOUT ══ -->
+  <section class="section section-light" id="about" aria-label="About">
+    <div class="container about-grid">
+
+      <div class="about-watermark" aria-hidden="true">R</div>
+
+      <div class="about-left reveal">
+        <div class="avatar-circle" aria-label="Initials: KRA">KRA</div>
       </div>
-      <div class="section-body">
-        <h2>I build things on the internet and think a lot about how technology shapes people.</h2>
-        <p>I'm a second-year Computer Science student with a love for clean code and even cleaner design. When I'm not knee-deep in a side project, you'll find me outdoors or buried in a good book. I believe the best software is invisible — it just works, and it works beautifully.</p>
-        <p>Originally from Bhubaneswar, India, I grew up tinkering with electronics before discovering that software could let me build <em>anything</em> without needing a soldering iron.</p>
-        <blockquote class="pull-quote">"The best way to predict the future is to build it."</blockquote>
+
+      <div class="about-right reveal">
+        <span class="deck-label">About</span>
+        <h2>A mind shaped by circuits,<br />sharpened by strategy.</h2>
+        <p class="about-bio">Electronics and Communication Engineer from IIITDM Kancheepuram, now pursuing the Business Management Programme at Xavier Institute of Management Bhubaneswar (XIMB). Bridging the gap between technical depth and business acumen — with a particular interest in product strategy, consulting, and tech-driven ventures.</p>
+        <p class="about-bio">The discipline of engineering taught me how to think in systems. Management is teaching me how to lead them.</p>
+
+        <div class="callout-row">
+          <div class="callout-card reveal">
+            <span class="callout-top">Degree</span>
+            <span class="callout-main">B.Tech ECE</span>
+          </div>
+          <div class="callout-card reveal">
+            <span class="callout-top">Institute</span>
+            <span class="callout-main">IIITDM Kancheepuram</span>
+          </div>
+          <div class="callout-card reveal">
+            <span class="callout-top">Current</span>
+            <span class="callout-main">MBA @ XIMB</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── BACKGROUND ── -->
-  <section class="section section-alt" id="background">
+  <!-- ══ EDUCATION ══ -->
+  <section class="section section-dark" id="education" aria-label="Education">
     <div class="container">
-      <div class="section-label">
-        <span class="label-line"></span>
-        <span>Background</span>
+      <div class="section-header reveal">
+        <span class="deck-label deck-label-light">Education</span>
+        <h2 class="section-title-light">Academic Journey</h2>
       </div>
-      <h2 class="section-heading">My journey so far</h2>
-      <div class="timeline" id="timeline">
-        <div class="timeline-item" data-year="2024–Present">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-year">2024 – Present</span>
-            <h3>B.Tech in Computer Science</h3>
-            <p>Enrolled at a leading engineering college in Odisha. Focused on algorithms, data structures, and full-stack web development. Active member of the coding club.</p>
+
+      <div class="edu-grid">
+        <div class="edu-card reveal" tabindex="0">
+          <div class="edu-card-tag">Engineering</div>
+          <div class="edu-card-body">
+            <p class="edu-institution">Indian Institute of Information Technology,<br />Design &amp; Manufacturing, Kancheepuram</p>
+            <h3 class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</h3>
+            <p class="edu-detail">Rigorous training in signal processing, embedded systems, VLSI design, and communications — with a strong focus on first-principles thinking and engineering problem-solving.</p>
+          </div>
+          <div class="edu-card-footer">
+            <span class="edu-year">2019 – 2023</span>
           </div>
         </div>
-        <div class="timeline-item" data-year="2023">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-year">2023</span>
-            <h3>First open-source contribution</h3>
-            <p>Submitted a bug fix to a small Python library. Small step, but it changed how I saw myself — from consumer to contributor.</p>
+
+        <div class="edu-card edu-card-accent reveal" tabindex="0">
+          <div class="edu-card-tag edu-card-tag-gold">Management</div>
+          <div class="edu-card-body">
+            <p class="edu-institution">Xavier Institute of Management,<br />Bhubaneswar (XIMB)</p>
+            <h3 class="edu-degree">Business Management Programme (MBA)</h3>
+            <p class="edu-detail">A transformative programme at one of India's premier B-schools — building strategic thinking, leadership capabilities, and the business acumen to drive organisations forward.</p>
           </div>
-        </div>
-        <div class="timeline-item" data-year="2022">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-year">2022</span>
-            <h3>High school & first lines of code</h3>
-            <p>Completed secondary school with a science stream. Wrote my first Python script in a free online course and immediately knew this was the path.</p>
-          </div>
-        </div>
-        <div class="timeline-item" data-year="2006">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-year">2006</span>
-            <h3>Born in Bhubaneswar, Odisha</h3>
-            <p>Grew up in the temple city, surrounded by technology-curious family members who encouraged endless questions.</p>
+          <div class="edu-card-footer">
+            <span class="edu-year">2024 – Present</span>
+            <span class="edu-badge">Current</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── HOBBIES ── -->
-  <section class="section" id="hobbies">
+  <!-- ══ SKILLS ══ -->
+  <section class="section section-light" id="skills" aria-label="Skills">
     <div class="container">
-      <div class="section-label">
-        <span class="label-line"></span>
-        <span>Hobbies &amp; interests</span>
+      <div class="section-header reveal">
+        <span class="deck-label">Skills &amp; Interests</span>
+        <h2>Where engineering<br />meets enterprise.</h2>
       </div>
-      <h2 class="section-heading">Life beyond the terminal</h2>
-      <div class="hobby-grid">
-        <div class="hobby-card" data-index="0">
-          <div class="hobby-icon">📚</div>
-          <h3>Reading</h3>
-          <p>Science fiction and philosophy. Currently re-reading <em>Gödel, Escher, Bach</em> for the third time.</p>
-        </div>
-        <div class="hobby-card" data-index="1">
-          <div class="hobby-icon">🏸</div>
-          <h3>Badminton</h3>
-          <p>Weekend doubles matches at the local court. The fastest sport I know — great for the mind.</p>
-        </div>
-        <div class="hobby-card" data-index="2">
-          <div class="hobby-icon">🎸</div>
-          <h3>Guitar</h3>
-          <p>Self-taught. I mostly play fingerstyle covers late at night when the hostel quiets down.</p>
-        </div>
-        <div class="hobby-card" data-index="3">
-          <div class="hobby-icon">🏕️</div>
-          <h3>Hiking</h3>
-          <p>Weekend treks around the Eastern Ghats. Nothing resets perspective like altitude and silence.</p>
-        </div>
-        <div class="hobby-card" data-index="4">
-          <div class="hobby-icon">📷</div>
-          <h3>Photography</h3>
-          <p>Street and landscape. I shoot on a used mirrorless — the gear matters less than the eye.</p>
-        </div>
-        <div class="hobby-card" data-index="5">
-          <div class="hobby-icon">🍳</div>
-          <h3>Cooking</h3>
-          <p>Weekend experiments in the kitchen. Odia cuisine is my comfort, Italian is my challenge.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── SKILLS ── -->
-  <section class="section section-alt" id="skills">
-    <div class="container">
-      <div class="section-label">
-        <span class="label-line"></span>
-        <span>Skills</span>
-      </div>
-      <h2 class="section-heading">What I work with</h2>
-      <div class="skills-wrapper">
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <div class="skill-tags">
+      <div class="skills-grid">
+        <div class="skills-col reveal">
+          <h4 class="skills-col-title">Technical — ECE</h4>
+          <div class="tag-cloud">
+            <span class="tag">Signal Processing</span>
+            <span class="tag">Embedded Systems</span>
+            <span class="tag">VLSI Design</span>
+            <span class="tag">Circuit Design</span>
+            <span class="tag">Communication Systems</span>
             <span class="tag">Python</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Java</span>
-            <span class="tag">C</span>
-            <span class="tag">SQL</span>
+            <span class="tag">MATLAB</span>
+            <span class="tag">PCB Design</span>
           </div>
         </div>
-        <div class="skill-group">
-          <h4>Web &amp; Frameworks</h4>
-          <div class="skill-tags">
-            <span class="tag">HTML / CSS</span>
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">Express</span>
-            <span class="tag">REST APIs</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Tools &amp; Platforms</h4>
-          <div class="skill-tags">
-            <span class="tag">Git &amp; GitHub</span>
-            <span class="tag">Linux</span>
-            <span class="tag">VS Code</span>
-            <span class="tag">Figma</span>
-            <span class="tag">Firebase</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Currently learning</h4>
-          <div class="skill-tags">
-            <span class="tag tag-learning">TypeScript</span>
-            <span class="tag tag-learning">Next.js</span>
-            <span class="tag tag-learning">Machine Learning</span>
+
+        <div class="skills-divider" aria-hidden="true"></div>
+
+        <div class="skills-col reveal">
+          <h4 class="skills-col-title">Business &amp; Management</h4>
+          <div class="tag-cloud">
+            <span class="tag">Strategic Thinking</span>
+            <span class="tag">Business Analysis</span>
+            <span class="tag">Product Management</span>
+            <span class="tag">Consulting Frameworks</span>
+            <span class="tag">Financial Modelling</span>
+            <span class="tag">Leadership</span>
+            <span class="tag">Market Research</span>
+            <span class="tag">Operations</span>
           </div>
         </div>
       </div>
 
-      <div class="proficiency-bars" id="proficiencyBars">
-        <h4>Proficiency</h4>
-        <div class="bar-item">
-          <div class="bar-label"><span>Python</span><span class="bar-pct" data-val="85">0%</span></div>
-          <div class="bar-track"><div class="bar-fill" data-val="85"></div></div>
+      <div class="focus-row">
+        <div class="focus-card reveal" tabindex="0">
+          <div class="focus-icon" aria-hidden="true">♟</div>
+          <h3>Strategy</h3>
+          <p>Frameworks that translate ambiguity into decisive action — from Porter to first principles.</p>
         </div>
-        <div class="bar-item">
-          <div class="bar-label"><span>JavaScript</span><span class="bar-pct" data-val="78">0%</span></div>
-          <div class="bar-track"><div class="bar-fill" data-val="78"></div></div>
+        <div class="focus-card reveal" tabindex="0">
+          <div class="focus-icon" aria-hidden="true">⚙</div>
+          <h3>Technology</h3>
+          <p>Engineering intuition applied to product decisions, systems design, and tech ventures.</p>
         </div>
-        <div class="bar-item">
-          <div class="bar-label"><span>HTML / CSS</span><span class="bar-pct" data-val="90">0%</span></div>
-          <div class="bar-track"><div class="bar-fill" data-val="90"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-label"><span>Java</span><span class="bar-pct" data-val="65">0%</span></div>
-          <div class="bar-track"><div class="bar-fill" data-val="65"></div></div>
-        </div>
-        <div class="bar-item">
-          <div class="bar-label"><span>React</span><span class="bar-pct" data-val="60">0%</span></div>
-          <div class="bar-track"><div class="bar-fill" data-val="60"></div></div>
+        <div class="focus-card reveal" tabindex="0">
+          <div class="focus-icon" aria-hidden="true">◈</div>
+          <h3>Innovation</h3>
+          <p>Finding the intersection where circuits become companies and ideas become impact.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CONTACT ── -->
-  <section class="section" id="contact">
+  <!-- ══ CONTACT ══ -->
+  <section class="section section-dark" id="contact" aria-label="Contact">
     <div class="container contact-inner">
-      <div class="section-label">
-        <span class="label-line"></span>
-        <span>Contact</span>
+      <div class="section-header reveal">
+        <span class="deck-label deck-label-light">Let's Connect</span>
+        <h2 class="section-title-light">Open to opportunities,<br />ideas, and conversations.</h2>
       </div>
-      <h2 class="section-heading">Let's talk</h2>
-      <p class="contact-sub">Whether it's a project idea, a question, or just a hello — my inbox is always open.</p>
-      <form class="contact-form" id="contactForm" novalidate>
+
+      <form class="contact-form reveal" id="contactForm" novalidate aria-label="Contact form">
         <div class="form-row">
           <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-            <span class="form-error" id="nameError"></span>
+            <label for="fname">Name</label>
+            <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name" />
+            <span class="form-err" id="fnameErr" role="alert"></span>
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required />
-            <span class="form-error" id="emailError"></span>
+            <label for="femail">Email</label>
+            <input type="email" id="femail" name="email" placeholder="you@example.com" required autocomplete="email" />
+            <span class="form-err" id="femailErr" role="alert"></span>
           </div>
         </div>
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
-          <span class="form-error" id="messageError"></span>
+          <label for="fmessage">Message</label>
+          <textarea id="fmessage" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+          <span class="form-err" id="fmessageErr" role="alert"></span>
         </div>
-        <button type="submit" class="btn btn-primary btn-submit">Send message →</button>
-        <p class="form-success" id="formSuccess" aria-live="polite"></p>
+        <div class="form-footer">
+          <button type="submit" class="btn btn-gold btn-submit">Send Message →</button>
+          <p class="form-success" id="formSuccess" aria-live="polite"></p>
+        </div>
       </form>
-      <div class="social-links">
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:alex@example.com">Email</a>
+
+      <div class="social-row reveal">
+        <a href="https://linkedin.com" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="social-dot" aria-hidden="true">·</span>
+        <a href="https://github.com" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span class="social-dot" aria-hidden="true">·</span>
+        <a href="mailto:rishi@example.com" class="social-link">Email</a>
       </div>
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
-  <footer class="footer">
-    <p>Designed &amp; built by Alex Morgan · <span id="year"></span></p>
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-rule" aria-hidden="true"></div>
+    <p>© <span id="footerYear"></span> KVSNS Rishi Ashrith &nbsp;·&nbsp; Built with purpose.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
