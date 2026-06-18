@@ -1,227 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KVSNS Rishi Ashrith — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVSNS Rishi Ashrith | MBA Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ══ NAV ══ -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#hero" class="nav-monogram" aria-label="Home">KRA</a>
-    <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#about">About</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <nav class="navbar">
+        <div class="logo">RA</div>
 
-  <!-- ══ HERO ══ -->
-  <section class="hero" id="hero" aria-label="Introduction">
-    <div class="hero-bg-pulse" aria-hidden="true"></div>
-    <div class="hero-rule-vert" aria-hidden="true"></div>
+        <ul>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
 
-    <div class="hero-inner">
-      <span class="deck-label" id="heroEyebrow" aria-live="polite">Engineer.</span>
-      <h1 class="hero-name">KVSNS<br /><em>Rishi Ashrith</em></h1>
-      <p class="hero-path">B.Tech ECE &nbsp;·&nbsp; IIITDM Kancheepuram &nbsp;→&nbsp; MBA &nbsp;·&nbsp; XIMB</p>
-      <div class="hero-actions">
-        <a href="#about" class="btn btn-gold">View Profile</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
-      </div>
-    </div>
+        <button id="themeBtn">🌙</button>
+    </nav>
 
-    <div class="hero-scroll" aria-hidden="true">scroll ↓</div>
-  </section>
+    <section class="hero">
+        <div class="hero-content">
 
-  <!-- ══ ABOUT ══ -->
-  <section class="section section-light" id="about" aria-label="About">
-    <div class="container about-grid">
+            <span class="tag">MBA Portfolio</span>
 
-      <div class="about-watermark" aria-hidden="true">R</div>
+            <h1>KVSNS RISHI ASHRITH</h1>
 
-      <div class="about-left reveal">
-        <div class="avatar-circle" aria-label="Initials: KRA">KRA</div>
-      </div>
+            <h2>Engineer. Business Professional. Future Leader.</h2>
 
-      <div class="about-right reveal">
-        <span class="deck-label">About</span>
-        <h2>A mind shaped by circuits,<br />sharpened by strategy.</h2>
-        <p class="about-bio">Electronics and Communication Engineer from IIITDM Kancheepuram, now pursuing the Business Management Programme at Xavier Institute of Management Bhubaneswar (XIMB). Bridging the gap between technical depth and business acumen — with a particular interest in product strategy, consulting, and tech-driven ventures.</p>
-        <p class="about-bio">The discipline of engineering taught me how to think in systems. Management is teaching me how to lead them.</p>
+            <p>
+                Bridging technology, business strategy and leadership.
+                An Electronics & Communication Engineer from IIITDM
+                Kancheepuram currently pursuing Business Management
+                at XIMB.
+            </p>
 
-        <div class="callout-row">
-          <div class="callout-card reveal">
-            <span class="callout-top">Degree</span>
-            <span class="callout-main">B.Tech ECE</span>
-          </div>
-          <div class="callout-card reveal">
-            <span class="callout-top">Institute</span>
-            <span class="callout-main">IIITDM Kancheepuram</span>
-          </div>
-          <div class="callout-card reveal">
-            <span class="callout-top">Current</span>
-            <span class="callout-main">MBA @ XIMB</span>
-          </div>
+            <div class="hero-buttons">
+                <a href="#journey" class="btn primary">Explore Journey</a>
+                <a href="resume.pdf" class="btn secondary">Download Resume</a>
+            </div>
+
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ══ EDUCATION ══ -->
-  <section class="section section-dark" id="education" aria-label="Education">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="deck-label deck-label-light">Education</span>
-        <h2 class="section-title-light">Academic Journey</h2>
-      </div>
+    <section class="summary">
+        <h2>Executive Snapshot</h2>
 
-      <div class="edu-grid">
-        <div class="edu-card reveal" tabindex="0">
-          <div class="edu-card-tag">Engineering</div>
-          <div class="edu-card-body">
-            <p class="edu-institution">Indian Institute of Information Technology,<br />Design &amp; Manufacturing, Kancheepuram</p>
-            <h3 class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</h3>
-            <p class="edu-detail">Rigorous training in signal processing, embedded systems, VLSI design, and communications — with a strong focus on first-principles thinking and engineering problem-solving.</p>
-          </div>
-          <div class="edu-card-footer">
-            <span class="edu-year">2019 – 2023</span>
-          </div>
+        <div class="cards">
+
+            <div class="card">
+                <h3>B.Tech</h3>
+                <p>Electronics & Communication Engineering</p>
+            </div>
+
+            <div class="card">
+                <h3>IIITDM</h3>
+                <p>Kancheepuram</p>
+            </div>
+
+            <div class="card">
+                <h3>XIMB</h3>
+                <p>Business Management Programme</p>
+            </div>
+
+            <div class="card">
+                <h3>Experience</h3>
+                <p>Foundever & Bharat Electronics</p>
+            </div>
+
         </div>
+    </section>
 
-        <div class="edu-card edu-card-accent reveal" tabindex="0">
-          <div class="edu-card-tag edu-card-tag-gold">Management</div>
-          <div class="edu-card-body">
-            <p class="edu-institution">Xavier Institute of Management,<br />Bhubaneswar (XIMB)</p>
-            <h3 class="edu-degree">Business Management Programme (MBA)</h3>
-            <p class="edu-detail">A transformative programme at one of India's premier B-schools — building strategic thinking, leadership capabilities, and the business acumen to drive organisations forward.</p>
-          </div>
-          <div class="edu-card-footer">
-            <span class="edu-year">2024 – Present</span>
-            <span class="edu-badge">Current</span>
-          </div>
+    <section id="journey" class="journey">
+        <h2>My Journey</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <h3>Engineering Foundation</h3>
+                <p>IIITDM Kancheepuram</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>BEL Internship</h3>
+                <p>Industrial Engineering Exposure</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Foundever</h3>
+                <p>Customer Support Professional</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>XIMB</h3>
+                <p>Business Management</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Future Vision</h3>
+                <p>Consulting & Business Strategy</p>
+            </div>
+
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ══ SKILLS ══ -->
-  <section class="section section-light" id="skills" aria-label="Skills">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="deck-label">Skills &amp; Interests</span>
-        <h2>Where engineering<br />meets enterprise.</h2>
-      </div>
+    <section id="education" class="education">
+        <h2>Education</h2>
 
-      <div class="skills-grid">
-        <div class="skills-col reveal">
-          <h4 class="skills-col-title">Technical — ECE</h4>
-          <div class="tag-cloud">
-            <span class="tag">Signal Processing</span>
-            <span class="tag">Embedded Systems</span>
-            <span class="tag">VLSI Design</span>
-            <span class="tag">Circuit Design</span>
-            <span class="tag">Communication Systems</span>
-            <span class="tag">Python</span>
-            <span class="tag">MATLAB</span>
-            <span class="tag">PCB Design</span>
-          </div>
+        <div class="cards">
+
+            <div class="card">
+                <h3>IIITDM Kancheepuram</h3>
+                <p>B.Tech in Electronics & Communication Engineering</p>
+            </div>
+
+            <div class="card">
+                <h3>XIMB</h3>
+                <p>Business Management Programme</p>
+            </div>
+
         </div>
+    </section>
 
-        <div class="skills-divider" aria-hidden="true"></div>
+    <section id="experience" class="experience">
+        <h2>Professional Experience</h2>
 
-        <div class="skills-col reveal">
-          <h4 class="skills-col-title">Business &amp; Management</h4>
-          <div class="tag-cloud">
-            <span class="tag">Strategic Thinking</span>
-            <span class="tag">Business Analysis</span>
-            <span class="tag">Product Management</span>
-            <span class="tag">Consulting Frameworks</span>
-            <span class="tag">Financial Modelling</span>
-            <span class="tag">Leadership</span>
-            <span class="tag">Market Research</span>
-            <span class="tag">Operations</span>
-          </div>
+        <div class="experience-grid">
+
+            <div class="exp-card">
+                <h3>Foundever</h3>
+                <h4>Customer Support Professional</h4>
+
+                <ul>
+                    <li>Customer Relationship Management</li>
+                    <li>Issue Resolution</li>
+                    <li>Stakeholder Communication</li>
+                    <li>Service Quality Improvement</li>
+                </ul>
+            </div>
+
+            <div class="exp-card">
+                <h3>Bharat Electronics Limited</h3>
+                <h4>Intern</h4>
+
+                <ul>
+                    <li>Electronics Systems Exposure</li>
+                    <li>Engineering Processes</li>
+                    <li>Technical Documentation</li>
+                    <li>Industrial Operations</li>
+                </ul>
+            </div>
+
         </div>
-      </div>
+    </section>
 
-      <div class="focus-row">
-        <div class="focus-card reveal" tabindex="0">
-          <div class="focus-icon" aria-hidden="true">♟</div>
-          <h3>Strategy</h3>
-          <p>Frameworks that translate ambiguity into decisive action — from Porter to first principles.</p>
-        </div>
-        <div class="focus-card reveal" tabindex="0">
-          <div class="focus-icon" aria-hidden="true">⚙</div>
-          <h3>Technology</h3>
-          <p>Engineering intuition applied to product decisions, systems design, and tech ventures.</p>
-        </div>
-        <div class="focus-card reveal" tabindex="0">
-          <div class="focus-icon" aria-hidden="true">◈</div>
-          <h3>Innovation</h3>
-          <p>Finding the intersection where circuits become companies and ideas become impact.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="skills" class="skills">
+        <h2>Capabilities</h2>
 
-  <!-- ══ CONTACT ══ -->
-  <section class="section section-dark" id="contact" aria-label="Contact">
-    <div class="container contact-inner">
-      <div class="section-header reveal">
-        <span class="deck-label deck-label-light">Let's Connect</span>
-        <h2 class="section-title-light">Open to opportunities,<br />ideas, and conversations.</h2>
-      </div>
+        <div class="skill-grid">
 
-      <form class="contact-form reveal" id="contactForm" novalidate aria-label="Contact form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">Name</label>
-            <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name" />
-            <span class="form-err" id="fnameErr" role="alert"></span>
-          </div>
-          <div class="form-group">
-            <label for="femail">Email</label>
-            <input type="email" id="femail" name="email" placeholder="you@example.com" required autocomplete="email" />
-            <span class="form-err" id="femailErr" role="alert"></span>
-          </div>
+            <div class="skill-card">Strategic Thinking</div>
+            <div class="skill-card">Business Analytics</div>
+            <div class="skill-card">Leadership</div>
+            <div class="skill-card">Marketing</div>
+            <div class="skill-card">Problem Solving</div>
+            <div class="skill-card">Electronics</div>
+            <div class="skill-card">Communication</div>
+            <div class="skill-card">Stakeholder Management</div>
+
         </div>
-        <div class="form-group">
-          <label for="fmessage">Message</label>
-          <textarea id="fmessage" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
-          <span class="form-err" id="fmessageErr" role="alert"></span>
-        </div>
-        <div class="form-footer">
-          <button type="submit" class="btn btn-gold btn-submit">Send Message →</button>
-          <p class="form-success" id="formSuccess" aria-live="polite"></p>
-        </div>
-      </form>
+    </section>
 
-      <div class="social-row reveal">
-        <a href="https://linkedin.com" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <span class="social-dot" aria-hidden="true">·</span>
-        <a href="https://github.com" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <span class="social-dot" aria-hidden="true">·</span>
-        <a href="mailto:rishi@example.com" class="social-link">Email</a>
-      </div>
-    </div>
-  </section>
+    <section class="vision">
+        <h2>My Vision</h2>
 
-  <!-- ══ FOOTER ══ -->
-  <footer class="footer" role="contentinfo">
-    <div class="footer-rule" aria-hidden="true"></div>
-    <p>© <span id="footerYear"></span> KVSNS Rishi Ashrith &nbsp;·&nbsp; Built with purpose.</p>
-  </footer>
+        <blockquote>
+            To leverage technology, business strategy, and human
+            understanding to create impactful solutions that drive
+            sustainable growth and meaningful change.
+        </blockquote>
+    </section>
 
-  <script src="main.js"></script>
+    <section id="contact" class="contact">
+
+        <h2>Let's Connect</h2>
+
+        <a
+            href="https://www.linkedin.com/in/rishi-ashrith-6009713b8"
+            target="_blank"
+            class="linkedin-btn">
+            LinkedIn Profile
+        </a>
+
+    </section>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
