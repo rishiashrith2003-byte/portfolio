@@ -1,585 +1,231 @@
-/* ─────────────────────────────────────────
-   TOKENS & RESET
-───────────────────────────────────────── */
-:root {
-  --bg:        #0d0d0d;
-  --bg-alt:    #111111;
-  --surface:   #181818;
-  --border:    rgba(255,255,255,0.08);
-  --accent:    #c8f562;        /* acid-lime — the signature color */
-  --accent-dk: #9fca3a;
-  --text:      #f0ede6;
-  --muted:     rgba(240,237,230,0.55);
-  --serif:     'DM Serif Display', Georgia, serif;
-  --sans:      'Inter', system-ui, sans-serif;
-  --mono:      'JetBrains Mono', monospace;
-  --radius:    10px;
-  --max:       1100px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+"use strict";
+
+/* ════════════════════════════════════════════
+   1. FOOTER YEAR
+════════════════════════════════════════════ */
+const yearEl = document.getElementById("footerYear");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* ════════════════════════════════════════════
+   2. STICKY NAV — .scrolled after 80px
+════════════════════════════════════════════ */
+const nav = document.getElementById("nav");
+
+function onNavScroll() {
+  nav.classList.toggle("scrolled", window.scrollY > 80);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-
-/* ─────────────────────────────────────────
-   TYPOGRAPHY
-───────────────────────────────────────── */
-h1, h2 { font-family: var(--serif); font-weight: 400; line-height: 1.15; }
-h3 { font-weight: 500; font-size: 1.05rem; margin-bottom: 0.4rem; }
-h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.9rem; }
-p  { color: var(--muted); max-width: 62ch; }
-em { font-style: italic; color: var(--text); }
-
-/* ─────────────────────────────────────────
-   LAYOUT UTILITIES
-───────────────────────────────────────── */
-.container {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.two-col {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.section {
-  padding: 7rem 0;
-  border-top: 1px solid var(--border);
-}
-
-.section-alt {
-  background: var(--bg-alt);
-}
-
-.section-label {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-bottom: 2rem;
-}
-
-.label-line {
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.section-heading {
-  font-family: var(--serif);
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  margin-bottom: 3rem;
-}
-
-/* ─────────────────────────────────────────
-   BUTTONS
-───────────────────────────────────────── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
-  border-radius: var(--radius);
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: background var(--transition), color var(--transition), border-color var(--transition), transform 0.15s;
-}
-
-.btn:active { transform: scale(0.97); }
-
-.btn-primary {
-  background: var(--accent);
-  color: #0d0d0d;
-  border-color: var(--accent);
-}
-
-.btn-primary:hover { background: var(--accent-dk); border-color: var(--accent-dk); }
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-}
-
-.btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
-
-/* ─────────────────────────────────────────
-   NAV
-───────────────────────────────────────── */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 2.5rem;
-  background: rgba(13,13,13,0);
-  backdrop-filter: blur(0px);
-  border-bottom: 1px solid transparent;
-  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-}
-
-.nav.scrolled {
-  background: rgba(13,13,13,0.9);
-  backdrop-filter: blur(16px);
-  border-color: var(--border);
-}
-
-.nav-logo {
-  font-family: var(--mono);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2.5rem;
-}
-
-.nav-links a {
-  font-size: 0.85rem;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  transition: color var(--transition);
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: -3px;
-  width: 0; height: 1px;
-  background: var(--accent);
-  transition: width var(--transition);
-}
-
-.nav-links a:hover { color: var(--text); }
-.nav-links a:hover::after { width: 100%; }
-
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-}
-
-.nav-toggle span {
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--text);
-  transition: transform var(--transition), opacity var(--transition);
-}
-
-/* ─────────────────────────────────────────
-   HERO
-───────────────────────────────────────── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding: 8rem 2rem 6rem;
-}
-
-.hero-noise {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(200,245,98,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,245,98,0.04) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.hero-inner {
-  max-width: var(--max);
-  margin: 0 auto;
-  width: 100%;
-}
-
-.eyebrow {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.82rem;
-  color: var(--accent);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
-}
-
-.hero-name {
-  font-size: clamp(4rem, 11vw, 9rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
-}
-
-.hero-name em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-.hero-tagline {
-  font-size: 1.05rem;
-  color: var(--muted);
-  margin-bottom: 2.5rem;
-  max-width: 44ch;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.14em;
-  animation: bob 2.4s ease-in-out infinite;
-}
-
-@keyframes bob {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
-}
-
-/* ─────────────────────────────────────────
-   ABOUT
-───────────────────────────────────────── */
-.section-body h2 {
-  font-size: clamp(1.5rem, 2.5vw, 1.95rem);
-  margin-bottom: 1.5rem;
-}
-
-.pull-quote {
-  margin: 2rem 0 0;
-  padding-left: 1.25rem;
-  border-left: 3px solid var(--accent);
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-style: italic;
-  color: var(--text);
-  opacity: 0.85;
-}
-
-/* ─────────────────────────────────────────
-   TIMELINE
-───────────────────────────────────────── */
-.timeline {
-  position: relative;
-  padding-left: 2rem;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 8px; bottom: 8px;
-  width: 1px;
-  background: var(--border);
-}
-
-.timeline-item {
-  position: relative;
-  padding: 0 0 3rem 2.5rem;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.5s, transform 0.5s;
-}
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -7px; top: 6px;
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--accent);
-  transition: background var(--transition);
-}
-
-.timeline-item:hover .timeline-dot { background: var(--accent); }
-
-.timeline-year {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.4rem;
-}
-
-.timeline-content h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
-
-/* ─────────────────────────────────────────
-   HOBBY GRID
-───────────────────────────────────────── */
-.hobby-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-}
-
-.hobby-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.75rem 1.5rem;
-  transition: border-color var(--transition), transform var(--transition);
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.hobby-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hobby-card:hover {
-  border-color: rgba(200,245,98,0.35);
-  transform: translateY(-4px);
-}
-
-.hobby-icon {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-  line-height: 1;
-}
-
-.hobby-card p { font-size: 0.9rem; }
-
-/* ─────────────────────────────────────────
-   SKILLS
-───────────────────────────────────────── */
-.skills-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2.5rem;
-  margin-bottom: 3.5rem;
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tag {
-  display: inline-block;
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  font-size: 0.82rem;
-  color: var(--muted);
-  transition: border-color var(--transition), color var(--transition);
-}
-
-.tag:hover { border-color: var(--accent); color: var(--accent); }
-
-.tag-learning {
-  border-color: rgba(200,245,98,0.25);
-  color: var(--accent);
-  opacity: 0.7;
-}
-
-/* Proficiency bars */
-.proficiency-bars { max-width: 640px; }
-
-.bar-item { margin-bottom: 1.2rem; }
-
-.bar-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.88rem;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
-}
-
-.bar-pct { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
-
-.bar-track {
-  height: 4px;
-  background: var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--accent);
-  border-radius: 999px;
-  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ─────────────────────────────────────────
-   CONTACT
-───────────────────────────────────────── */
-.contact-inner { max-width: 700px; }
-
-.contact-sub {
-  margin-bottom: 2.5rem;
-  font-size: 1rem;
-  max-width: 50ch;
-}
-
-.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-}
-
-.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-
-label { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.04em; }
-
-input, textarea {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color var(--transition), box-shadow var(--transition);
-  resize: vertical;
-}
-
-input::placeholder, textarea::placeholder { color: rgba(240,237,230,0.25); }
-
-input:focus, textarea:focus {
-  border-color: rgba(200,245,98,0.5);
-  box-shadow: 0 0 0 3px rgba(200,245,98,0.08);
-}
-
-input.error, textarea.error { border-color: #e24b4a; }
-
-.form-error {
-  font-size: 0.78rem;
-  color: #e24b4a;
-  min-height: 1rem;
-}
-
-.btn-submit { align-self: flex-start; margin-top: 0.5rem; }
-
-.form-success {
-  font-size: 0.9rem;
-  color: var(--accent);
-  min-height: 1.2rem;
-}
-
-.social-links {
-  margin-top: 3rem;
-  display: flex;
-  gap: 2rem;
-}
-
-.social-links a {
-  font-size: 0.85rem;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 2px;
-  transition: color var(--transition), border-color var(--transition);
-}
-
-.social-links a:hover { color: var(--accent); border-color: var(--accent); }
-
-/* ─────────────────────────────────────────
-   FOOTER
-───────────────────────────────────────── */
-.footer {
-  padding: 2.5rem 2rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-
-/* ─────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────── */
-@media (max-width: 768px) {
-  .two-col {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+window.addEventListener("scroll", onNavScroll, { passive: true });
+onNavScroll();
+
+/* ════════════════════════════════════════════
+   3. MOBILE BURGER MENU
+════════════════════════════════════════════ */
+const burger    = document.getElementById("navBurger");
+const navLinks  = document.getElementById("navLinks");
+
+burger.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  burger.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
+});
+
+// Allow keyboard: Enter / Space
+burger.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    burger.click();
+  }
+});
+
+// Close on link click
+navLinks.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    burger.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+  });
+});
+
+/* ════════════════════════════════════════════
+   4. ACTIVE NAV LINK (scroll-spy)
+════════════════════════════════════════════ */
+const sections    = document.querySelectorAll("section[id]");
+const navAnchors  = document.querySelectorAll(".nav-links a");
+
+const spyObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.getAttribute("id");
+      navAnchors.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
+      });
+    });
+  },
+  { threshold: 0.45 }
+);
+
+sections.forEach(s => spyObserver.observe(s));
+
+/* ════════════════════════════════════════════
+   5. SCROLL REVEAL (IntersectionObserver)
+════════════════════════════════════════════ */
+const revealEls = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry, _i) => {
+      if (!entry.isIntersecting) return;
+
+      // Stagger siblings inside same parent
+      const siblings = Array.from(entry.target.parentElement.children).filter(
+        el => el.classList.contains("reveal")
+      );
+      const idx = siblings.indexOf(entry.target);
+      entry.target.style.transitionDelay = `${idx * 90}ms`;
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.12 }
+);
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ════════════════════════════════════════════
+   6. HERO EYEBROW TYPING EFFECT
+════════════════════════════════════════════ */
+(function heroTyping() {
+  const el     = document.getElementById("heroEyebrow");
+  if (!el) return;
+
+  const words  = ["Engineer.", "Strategist.", "Builder.", "Leader."];
+  let   wi     = 0;       // word index
+  let   ci     = 0;       // char index
+  let   deleting = false;
+  const PAUSE_FULL  = 2200;  // pause when word fully typed
+  const PAUSE_EMPTY = 450;   // pause when cleared
+  const TYPE_SPEED  = 80;
+  const DEL_SPEED   = 45;
+
+  function tick() {
+    const word    = words[wi];
+    const current = word.slice(0, ci);
+    el.textContent = current + "|";
+
+    if (!deleting && ci === word.length) {
+      setTimeout(() => { deleting = true; tick(); }, PAUSE_FULL);
+      return;
+    }
+
+    if (deleting && ci === 0) {
+      deleting = false;
+      wi = (wi + 1) % words.length;
+      setTimeout(tick, PAUSE_EMPTY);
+      return;
+    }
+
+    ci += deleting ? -1 : 1;
+    setTimeout(tick, deleting ? DEL_SPEED : TYPE_SPEED);
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 1.25rem;
-    position: absolute;
-    top: 100%; left: 0; right: 0;
-    background: rgba(13,13,13,0.97);
-    backdrop-filter: blur(16px);
-    padding: 1.5rem 2.5rem;
-    border-bottom: 1px solid var(--border);
+  setTimeout(tick, 800);
+})();
+
+/* ════════════════════════════════════════════
+   7. CONTACT FORM — validation + fake POST
+════════════════════════════════════════════ */
+(function contactForm() {
+  const form       = document.getElementById("contactForm");
+  if (!form) return;
+
+  const fields = {
+    name:    { el: document.getElementById("fname"),    err: document.getElementById("fnameErr") },
+    email:   { el: document.getElementById("femail"),   err: document.getElementById("femailErr") },
+    message: { el: document.getElementById("fmessage"), err: document.getElementById("fmessageErr") },
+  };
+  const successEl = document.getElementById("formSuccess");
+
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setErr(f, msg) {
+    f.el.classList.add("field-err");
+    f.err.textContent = msg;
   }
 
-  .nav-links.open { display: flex; }
-
-  .nav-toggle { display: flex; }
-
-  .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-  .form-row { grid-template-columns: 1fr; }
-
-  .hero { padding: 7rem 1.5rem 5rem; }
-  .hero-name { font-size: clamp(3rem, 15vw, 5rem); }
-
-  .section { padding: 5rem 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  function clearErr(f) {
+    f.el.classList.remove("field-err");
+    f.err.textContent = "";
   }
-}
+
+  function validate() {
+    let ok = true;
+
+    const name = fields.name.el.value.trim();
+    if (!name || name.length < 2) {
+      setErr(fields.name, "Please enter your name.");
+      ok = false;
+    } else { clearErr(fields.name); }
+
+    const email = fields.email.el.value.trim();
+    if (!email) {
+      setErr(fields.email, "Email is required.");
+      ok = false;
+    } else if (!emailRx.test(email)) {
+      setErr(fields.email, "Enter a valid email address.");
+      ok = false;
+    } else { clearErr(fields.email); }
+
+    const msg = fields.message.el.value.trim();
+    if (!msg || msg.length < 10) {
+      setErr(fields.message, "Message should be at least 10 characters.");
+      ok = false;
+    } else { clearErr(fields.message); }
+
+    return ok;
+  }
+
+  // Live re-validate on blur
+  Object.values(fields).forEach(f => {
+    f.el.addEventListener("blur", () => validate());
+    f.el.addEventListener("input", () => {
+      if (f.el.classList.contains("field-err")) validate();
+    });
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    successEl.textContent = "";
+
+    if (!validate()) return;
+
+    const btn = form.querySelector(".btn-submit");
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    // Simulate /api/contact POST — replace with real fetch in Node.js context:
+    // fetch("/api/contact", { method: "POST", headers: {"Content-Type":"application/json"},
+    //   body: JSON.stringify({ name, email, message }) })
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = "Send Message →";
+      form.reset();
+      Object.values(fields).forEach(clearErr);
+      successEl.textContent = "✓ Message received. I'll be in touch.";
+      setTimeout(() => { successEl.textContent = ""; }, 5500);
+    }, 1600);
+  });
+})();
+
+/* ════════════════════════════════════════════
+   8. SMOOTH ANCHOR SCROLL
+════════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.querySelector(a.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
