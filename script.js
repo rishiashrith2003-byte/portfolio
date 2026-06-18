@@ -1,45 +1,28 @@
-const btn = document.getElementById("themeBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const footerText = document.getElementById("footer-text");
+  const year = new Date().getFullYear();
+  footerText.textContent = `© ${year} Adapa Avinash. All rights reserved.`;
 
-btn.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-});
+  const sections = document.querySelectorAll(".section, .hero-content");
 
-const observer = new IntersectionObserver(entries => {
+  const revealSections = () => {
+    sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const triggerBottom = window.innerHeight * 0.85;
 
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
-
+      if (sectionTop < triggerBottom) {
+        section.style.opacity = "1";
+        section.style.transform = "translateY(0)";
+      }
     });
+  };
 
-});
+  sections.forEach((section) => {
+    section.style.opacity = "0";
+    section.style.transform = "translateY(30px)";
+    section.style.transition = "all 0.8s ease";
+  });
 
-document.querySelectorAll(".card,.exp-card,.skill-card,.timeline-item")
-.forEach(item => {
-
-    item.style.opacity = "0";
-    item.style.transform = "translateY(40px)";
-    item.style.transition = "all .8s ease";
-
-    observer.observe(item);
-
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener("click", function(e){
-
-        e.preventDefault();
-
-        document.querySelector(
-            this.getAttribute("href")
-        ).scrollIntoView({
-            behavior:"smooth"
-        });
-
-    });
-
+  revealSections();
+  window.addEventListener("scroll", revealSections);
 });
